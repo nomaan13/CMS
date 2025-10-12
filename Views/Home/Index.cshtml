@@ -1,0 +1,189 @@
+﻿@{
+
+    ViewData["Title"] = "Add CMS";
+}
+
+<style>
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .tab-content > .tab-pane {
+        line-height: 15px;
+    }
+</style>
+
+
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+
+
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Article's Details</h4>
+                            <div class="card-header-form">
+                                <a class="btn btn-icon btn-info" href="#" onclick="javascript:openModal('boxModal')"><i class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive p-0">
+                                <table class="table table-striped" id="table-Item" style="width: 100%">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Publisher_Id</th>
+                                            <th>Journal_Id</th>
+                                            <th>Article Name</th>
+                                            <th>Created by</th>
+                                            <th>Created at</th>
+                                            <th>status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyItem">
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <div class="modal fade bd-example-modal-lg" id="boxModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="new_title">Add New</h5>
+                    <h5 class="modal-title" id="up_title">Update Detail</h5>
+                    <button type="button" class="close" onclick="closeModal('boxModal')"><span aria-hidden="true">&times;</span></button>
+                    @* <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button> *@
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id" />
+                    <input type="hidden" id="type" />
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label class="form-label col-12">Publisher Name</label>
+                            <input type="hidden" id="ph_id"  />
+                            <input type="text" class="form-control" id="ph_name"  disabled />
+                            @*  <select class="form-control" id="ph_id" >                                
+                            </select> *@
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label col-12">Journal Name</label>
+                            <input type="hidden" id="jn_id"  />
+                            <input type="text" class="form-control" id="jn_name"  disabled />
+                            @*  <select class="form-control" id="">
+                            </select> *@
+                        </div>
+
+                        <div class="form-group col-12 col-md-6">
+                            <label class="col-12">Article Name</label>
+                            <input type="text" class="form-control" id="articl_name" onblur="checkExist()" />
+                        </div>
+
+                        <div class="form-group col-6 mt-2">
+                            <label class="col-md-8">Status</label>
+                            <div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="active" name="active" class="custom-control-input" value="true">
+                                    <label class="custom-control-label" for="active">Active</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="inactive" name="active" class="custom-control-input" value="false">
+                                    <label class="custom-control-label" for="inactive">Inactive</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+
+                    <button type="button" class="btn btn-success" id="InsertData1" onclick="InsertData()">Save</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirm -->
+    <div class="modal modal-dark fade" id="ConfirmModal" tabindex="-1" aria-labelledby="viewRowLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewRowLabel">Are you sure want to delete</h5>
+
+                    <button type="button" onclick="closeModal('ConfirmModal')">&times;</button>
+
+                </div>
+                <div class="modal-body">
+
+                    <!-- Row start -->
+                    <div class="row gutters">
+                        <div class="col-md-6 col-sm-6 col-12">
+                            <div class="mb-3 control-dark">
+                                <label id="confirmDelete" class="form-label"></label>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <input type="hidden" id="ConfirmID" />
+                            <input type="hidden" id="ConfirmBranchID" />
+
+                        </div>
+
+                    </div>
+                    <!-- Row end -->
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" onclick="DeleteData()">Yes</button>
+                    <button type="button" class="btn btn-light" onclick="closeModal('ConfirmModal')">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+
+    <script>
+
+        function openModal(id)
+        {
+            
+            $('#' + id).modal('show');
+        }
+
+        function closeModal(id) {
+            $('#' + id).modal('hide');
+
+        }
+
+
+    </script>
+
+
+
+}
