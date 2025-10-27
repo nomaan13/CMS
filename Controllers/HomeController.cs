@@ -18,7 +18,24 @@ namespace CMS.Controllers
             return View();
         }
 
+        //public IActionResult HealthForm()
+        //{
+        //    return View();
+        //}
+        public IActionResult HealthForm()
+        {
+            return Content("HealthForm Action is working");
+        }
+
+
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+
+        public IActionResult Index2
+            ()
         {
             return View();
         }

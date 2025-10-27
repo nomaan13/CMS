@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Add Article";
+}
+
+<div class="main-content" style="margin-left: 250px; padding: 20px;">
+    <h2 class="text-center mt-3 mb-4"> --------FORM------- </h2>
+
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <form id="articleForm">
+            <div class="row">
+               @* -----------------------------First INput Field---------- *@
+                <div class="form-group col-md-6">
+                    <label>TITLE</label>
+                    <input type="text" class="form-control" id="title" placeholder="Enter Title here" required />
+                </div>
+                    @* -----------------------------Second INput Field---------- *@
+                    <div class="form-group col-md-6">
+                        <label>logoimg</label>
+                        <input type="text" class="form-control" id="logoimg" placeholder="Add logo img" required />
+                </div>
+                    @* -----------------------------THIRD INput Field---------- *@
+                    <div class="form-group col-md-6">
+                        <label>bannerimg</label>
+                        <input type="text" class="form-control" id="bannerimg" placeholder="Add banner imgage" required />
+                </div>
+                    @* -----------------------------Fourth INput Field---------- *@
+                    <div class="form-group col-md-6">
+
+                        <label>bannertitle</label>
+                        <input type="text" class="form-control" id="bannertitle" placeholder="Enter bannertitle" required />
+                    </div>
+                    @* -----------------------------Fifth INput Field---------- *@
+                    <div class="form-group col-md-6">
+
+                        <label>bannerlocation</label>
+                        <input type="text" class="form-control" id="bannerlocation" placeholder="Enter Banner location" required />
+                </div>
+                    @* -----------------------------Six INput Field---------- *@
+                    <div class="form-group col-md-6">
+
+                        <label>bannerbuttontext</label>
+                        <input type="text" class="form-control" id="bannerbuttontext" placeholder="bannerbuttontext" required />
+                </div>
+                    @* -----------------------------First INput Field---------- *@
+                
+
+                
+            </div>
+
+            <div class="text-center mt-4">
+                <button  class="btn btn-success px-4 py-2">Submit</button>
+            </div>
+
+
+
+        </form>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    <script>
+         
+        $("#articleForm").on("submit", function (e) {
+            e.preventDefault();
+
+            const articleData = {
+                publisher_id: $("#publisher_id").val(),
+                publisher_name: $("#publisher_name").val(),
+                journal_id: $("#journal_id").val(),
+                journal_name: $("#journal_name").val(),
+                article_name: $("#article_name").val(),
+                created_by: $("#created_by").val(),
+                created_at: $("#created_at").val(),
+                status: $("input[name='status']:checked").val()
+            };
+
+            console.log("Submitted Data:", articleData);
+
+             
+            $.ajax({
+                url: '/Article/Add',  
+                type: 'POST',
+                data: articleData,
+                success: function (response) {
+                    alert("Article saved successfully!");
+                    $("#articleForm")[0].reset();
+                },
+                error: function () {
+                    alert("Error saving article!");
+                }
+            });
+        });
+    </script>
+}
