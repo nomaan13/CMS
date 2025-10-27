@@ -22,10 +22,7 @@ namespace CMS.Controllers
         {
             return View();
         }
-        //public IActionResult HealthForm()
-        //{
-        //    return Content("HealthForm Action is working");
-        //}
+        
 
 
         public IActionResult Privacy()
